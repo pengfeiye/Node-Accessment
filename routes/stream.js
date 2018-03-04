@@ -21,10 +21,12 @@ router.get('/', function(req, res){
   // })
   //
   // server.listen(8000)
-  console.log()
-  var x = fs.createReadStream('./public/stream.m3u8')
 
-  res.json(x.pipe(parser))
+  var x = fs.createReadStream('./public/stream/'+dir[1]+'/'+dir[2])
+  x.pipe(parser)
+
+  res.send(request(query))
+
 });
 
 module.exports = router;
