@@ -7,7 +7,7 @@ var shell = require('shelljs');
 var request = require('request');
 var m3u8 = require('m3u8');
 
-const parser = m3u8.createStream();
+var parser = m3u8.createStream();
 
 router.get('/', function(req, res){
   var query = req.query.hlsurl
@@ -22,10 +22,13 @@ router.get('/', function(req, res){
   //
   // server.listen(8000)
 
-  var x = fs.createReadStream('./public/stream/'+dir[1]+'/'+dir[2])
-  x.pipe(parser)
+  var video = fs.createReadStream('./public/stream/'+dir[1]+'/'+dir[2])
+  var video2 = fs.createReadStream('./public/test.txt')
+  video.pipe(parser)
 
-  res.send(request(query))
+  res.download('./public/stream/'+dir[1]+'/'+dir[2])
+
+
 
 });
 
