@@ -5,12 +5,12 @@ var fs = require('fs');
 var url = require('url');
 var shell = require('shelljs');
 var request = require('request');
-var m3u8 = require('m3u8');
+const m3u8 = require('m3u8-stream-list')
 var HLSServer = require('hls-server')
 
-var parser = m3u8.createStream();
 
-http.createServer(router.get('/', function(req, res){
+
+router.get('/', function(req, res){
   var query = req.query.hlsurl
   var dir = request(query).uri.pathname.split('/')
   shell.mkdir('-p', 'public/stream/'+dir[1])
@@ -19,8 +19,9 @@ http.createServer(router.get('/', function(req, res){
   //   response.writeHead(200,{'Content-Type':'video/m3u8'});
   //   fs.createReadStream('./public/stream/'+dir[1]+'/'+dir[2]).pipe(response)
   // }).listen(8000)
-  fs.createReadStream('./public/stream/'+dir[1]+'/'+dir[2]).pipe(res)
 
+  res.writeHead(200,{'Content-Type':'video/m3u8'});
+  fs.createReadStream('./routes/249414131.m3u8').pipe(res)
 
 
   // var server = http.createServer()
@@ -29,6 +30,6 @@ http.createServer(router.get('/', function(req, res){
   //   dir: path  // Directory that input files are stored
   // })
 
-})).listen(8000)
+})
 
 module.exports = router;
