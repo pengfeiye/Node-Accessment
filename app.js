@@ -35,6 +35,7 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 app.use('/stream', stream)
+app.use('/download',download)
 
 
 

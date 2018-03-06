@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var http = require('http');
 var fs = require('fs');
+var request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  var path = request.query.path
+  
 });
 
 module.exports = router;
