@@ -11,22 +11,25 @@ router.get('/', function(req, res){
   var dir = request(query).uri.pathname.split('/')
   var videoPath = './public/stream/'+ request(query).uri.host + '/' +dir[1]+'/'+dir[2]
   shell.mkdir('-p', 'public/stream/'+ request(query).uri.host + '/' + dir[1])
-  var streamPath = '/stream/'+ request(query).uri.host + '/' +dir[1]+'/'+dir[2]
 
   request.get(query).pipe(fs.createWriteStream(videoPath)).on('close', function(){
-    fs.readFile(videoPath,function(err,content){
-      if (err) {
-						res.writeHead(500);
-						res.end();
-					}
-      else{
-        res.writeHead(200,{'Content-Type':'video/application/vnd.apple.mpegurl'});
-        res.end(content, 'utf-8')
-      }
-    })
+    res.redirect(`download/${request(query).uri.host}/${dir[1]}/${dir[2]}`)
   })
+
+  // fs.readFile(`./public/stream/${req.params.path}/${req.params.folder}/${req.params.file`,function(err,content){
+  //   if (err) {
+  // 				res.writeHead(500);
+  // 				res.end();
+  // 			}
+  //   else{
+  //     res.writeHead(200,{'Content-Type':'video/application/vnd.apple.mpegurl'});
+  //     res.end(content, 'utf-8')
+  //   }
+  // })
 
 
 })
+
+
 
 module.exports = router;
