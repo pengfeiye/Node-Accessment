@@ -14,7 +14,16 @@ router.get('/', function(req, res){
   var streamPath = '/stream/'+ request(query).uri.host + '/' +dir[1]+'/'+dir[2]
 
   request.get(query).pipe(fs.createWriteStream(videoPath)).on('close', function(){
-    res.redirect(streamPath)
+    fs.readFile(videoPath,function(err,content){
+      if (err) {
+						res.writeHead(500);
+						res.end();
+					}
+      else{
+        res.writeHead(200,{'Content-Type':'video/application/vnd.apple.mpegurl'});
+        res.end(content, 'utf-8')
+      }
+    })
   })
 
 
