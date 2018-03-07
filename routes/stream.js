@@ -16,17 +16,6 @@ router.get('/', function(req, res){
     res.redirect(`download/${request(query).uri.host}/${dir[1]}/${dir[2]}`)
   })
 
-  // fs.readFile(`./public/stream/${req.params.path}/${req.params.folder}/${req.params.file`,function(err,content){
-  //   if (err) {
-  // 				res.writeHead(500);
-  // 				res.end();
-  // 			}
-  //   else{
-  //     res.writeHead(200,{'Content-Type':'video/application/vnd.apple.mpegurl'});
-  //     res.end(content, 'utf-8')
-  //   }
-  // })
-
 
 })
 

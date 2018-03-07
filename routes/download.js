@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-var request = require('request');
 
 /* GET home page. */
 router.get('/:path/:folder/:file', function(req, res, next) {
